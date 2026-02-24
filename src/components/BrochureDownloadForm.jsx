@@ -16,7 +16,19 @@ const BrochureDownloadForm = () => {
   const [showMonthYear, setShowMonthYear] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 991);
+    };
+
+    // initial check
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const totalDays = new Date(year, month + 1, 0).getDate();
@@ -33,17 +45,19 @@ const BrochureDownloadForm = () => {
     }
   }, [year, month]);
 
-  const visibleDays = days.slice(startIndex, startIndex + 7);
+  const daysToShow = isMobile ? 5 : 7;
+
+  const visibleDays = days.slice(startIndex, startIndex + daysToShow);
 
   const nextDays = () => {
     if (startIndex + 7 < days.length) {
-      setStartIndex(startIndex + 7);
+      setStartIndex(startIndex + daysToShow);
     }
   };
 
   const prevDays = () => {
     if (startIndex - 7 >= 0) {
-      setStartIndex(startIndex - 7);
+      setStartIndex(startIndex - daysToShow);
     }
   };
 
@@ -101,6 +115,19 @@ const BrochureDownloadForm = () => {
                     <span>
                       {new Date(year, month).toLocaleString("default", { month: "long" })} {year}
                     </span>
+                    <span>
+                        {isMobile && (
+                          <div
+                          className="calender-btn"
+                          onClick={() => setShowMonthYear(!showMonthYear)}
+                        >
+                          {/* › */}
+                          <Image src={calenderIcon} alt="Calender Icon" />
+                        </div>
+                        )
+
+                        }
+                        </span>
                     {/* <Image src={selectDrop} alt="arrow" /> */}
                   </div>
 
@@ -147,6 +174,17 @@ const BrochureDownloadForm = () => {
                       {/* › */}
                       <Image src={arrowNext} alt="Next" />
                     </button>
+                    {!isMobile && (
+                          <div
+                          className="calender-btn"
+                          onClick={() => setShowMonthYear(!showMonthYear)}
+                        >
+                          {/* › */}
+                          <Image src={calenderIcon} alt="Calender Icon" />
+                        </div>
+                        )
+
+                        }
                     <button
                       className="calender-btn"
                       onClick={() => setShowMonthYear(!showMonthYear)}

@@ -109,7 +109,7 @@ const page = () => {
       {rooms?.bannersection && (
         <InnerPageBanner banner={rooms?.bannersection} bdayInner={true} />
       )}
-      <div className="black-gr-div mt-3">
+      <div className="black-gr-div">
         {rooms?.contentsection && (
           <>
             <HmTextSec className="section-padding pb-0" text={rooms?.contentsection?.content} />

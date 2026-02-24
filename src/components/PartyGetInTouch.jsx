@@ -67,6 +67,19 @@ const PartyGetInTouch = ({
   const [days, setDays] = useState([]);
   const [showMonthYear, setShowMonthYear] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 991);
+    };
+
+    // initial check
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const customStyles = {
     control: (base, state) => ({
@@ -188,17 +201,19 @@ const PartyGetInTouch = ({
     }
   }, [year, month]);
 
-  const visibleDays = days.slice(startIndex, startIndex + 7);
+  const daysToShow = isMobile ? 5 : 7;
+
+  const visibleDays = days.slice(startIndex, startIndex + daysToShow);
 
   const nextDays = () => {
     if (startIndex + 7 < days.length) {
-      setStartIndex(startIndex + 7);
+      setStartIndex(startIndex + daysToShow);
     }
   };
 
   const prevDays = () => {
     if (startIndex - 7 >= 0) {
-      setStartIndex(startIndex - 7);
+      setStartIndex(startIndex - daysToShow);
     }
   };
 
@@ -330,6 +345,19 @@ const PartyGetInTouch = ({
                             <span>
                               {new Date(year, month).toLocaleString("default", { month: "long" })} {year}
                             </span>
+                            <span>
+                              {isMobile && (
+                                <div
+                                  className="calender-btn"
+                                  onClick={() => setShowMonthYear(!showMonthYear)}
+                                >
+                                  {/* › */}
+                                  <Image src={calenderIcon} alt="Calender Icon" />
+                                </div>
+                              )
+
+                              }
+                            </span>
                             {/* <Image src={selectDrop} alt="arrow" /> */}
                           </div>
                         </div>
@@ -372,6 +400,16 @@ const PartyGetInTouch = ({
                               {/* › */}
                               <Image src={arrowNext} alt="Next" />
                             </div>
+                            {!isMobile && (
+                              <div
+                                className="calender-btn"
+                                onClick={() => setShowMonthYear(!showMonthYear)}
+                              >
+                                {/* › */}
+                                <Image src={calenderIcon} alt="Calender Icon" />
+                              </div>
+                            )
+                            }
                             <div
                               className="calender-btn"
                               onClick={() => setShowMonthYear(!showMonthYear)}
@@ -399,7 +437,7 @@ const PartyGetInTouch = ({
                               </div>
 
                               <div className="years">
-                                {[2026, 2027, 2028, 2029,2030,2031,2032,2033].map((y) => (
+                                {[2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033].map((y) => (
                                   <div
                                     key={y}
                                     className={`option ${year === y ? "active" : ""}`}

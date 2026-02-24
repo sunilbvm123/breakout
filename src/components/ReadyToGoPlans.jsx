@@ -133,8 +133,11 @@ const ReadyToGoPlans = ({ data, className = "" }) => {
                             dangerouslySetInnerHTML={{ __html: item.heading }}
                           ></h3>
                           <p className="para">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Quisquam, quos.
+                            {/* Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Quisquam, quos. */}
+                            {
+                              item?.description
+                            }
                           </p>
                         </div>
                       </div>

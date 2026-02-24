@@ -196,7 +196,7 @@ export default function Home() {
 
 
   const [data, setData] = useState(null);
-  const [pageLoading, setPageLoading] = useState(true);
+  // const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
     const shouldScroll = sessionStorage.getItem("home_about_us_heading_key");
@@ -236,34 +236,34 @@ export default function Home() {
 
         // remove key so it doesn't auto-scroll again
         sessionStorage.removeItem("home_set_yourself_free_key");
-      }, 2000);
+      }, 1000);
     }
   }, [data]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setPageLoading(true);
+        // setPageLoading(true);
         const response = await api.get("/home-page");
         const homeData = response?.data?.data;
         setData(homeData);
       } catch (err) {
         console.error("Error fetching home page:", err);
       } finally {
-        setPageLoading(false);
+        // setPageLoading(false);
       }
     };
     fetchData();
   }, []);
 
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 2000); // 1000ms = 1 second
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     window.scrollTo(0, 0);
+  //   }, 2000); // 1000ms = 1 second
 
-    return () => clearTimeout(timer); // cleanup
-  }, []);
+  //   return () => clearTimeout(timer); // cleanup
+  // }, []);
 
 
   // if (pageLoading) {
@@ -273,12 +273,12 @@ export default function Home() {
 
   return (
     <>
-      {
-        pageLoading ? (
+      {/* {
+        pageLoading && (
           <div id="preloader">
             <div className="loader"></div>
           </div>
-        ) : (
+        ) }  */}
           <>
             {data && data?.bannersection && (
               <header className="hm-header">
@@ -569,8 +569,8 @@ export default function Home() {
               )}
             </div>
           </>
-        )
-      }
+        
+     
 
     </>
   );

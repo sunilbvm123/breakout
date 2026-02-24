@@ -855,6 +855,19 @@ const formattedPageName = safePageName
                         <span>
                           {new Date(year, month).toLocaleString("default", { month: "long" })} {year}
                         </span>
+                        <span>
+                        {isMobile && (
+                          <div
+                          className="calender-btn"
+                          onClick={() => setShowMonthYear(!showMonthYear)}
+                        >
+                          {/* › */}
+                          <Image src={calenderIcon} alt="Calender Icon" />
+                        </div>
+                        )
+
+                        }
+                        </span>
                         {/* <Image src={selectDrop} alt="arrow" /> */}
                       </div>
                     </div>
@@ -897,13 +910,18 @@ const formattedPageName = safePageName
                           {/* › */}
                           <Image src={arrowNext} alt="Next" />
                         </div>
-                        <div
+                        {!isMobile && (
+                          <div
                           className="calender-btn"
                           onClick={() => setShowMonthYear(!showMonthYear)}
                         >
                           {/* › */}
                           <Image src={calenderIcon} alt="Calender Icon" />
                         </div>
+                        )
+
+                        }
+                        
                       </div>
 
                       {showMonthYear && (

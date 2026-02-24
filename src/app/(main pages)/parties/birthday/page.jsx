@@ -75,7 +75,7 @@ import PartyGetInTouch from "@/components/PartyGetInTouch";
 
 
 const page = () => {
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const hmText =
     "At our one-of-a-kind birthday parties, your <span>loved one…Enjoys surprises,</span> gets crazy, has fun, creates memories.In short, they <span>feel truly</span> special – and so do you.Let’s make this birthday unforgettable—together!";
 
@@ -152,7 +152,7 @@ const page = () => {
   const [birthdayList, setBirthdayList] = useState(null);
 
 
- 
+
 
   useEffect(() => {
     const shouldScroll = sessionStorage.getItem("brithday_party_birthday_of_my");
@@ -325,7 +325,8 @@ const page = () => {
             </div>
             <div className="black-gr-div">
               {/* <PartyExpertCon /> */}
-              {data?.slidersection && <ReadyToGoPlans className="sec-padding-top pb-0" data={data?.slidersection} />}
+              {data?.slidersection && <ReadyToGoPlans
+                className="sec-padding-top pb-0" data={data?.slidersection} />}
               {data?.googlereviews && (
                 <div className="pt-80">
                   <GReviewSlider commonStars={false} data={data?.googlereviews} />
