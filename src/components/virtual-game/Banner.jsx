@@ -48,9 +48,9 @@ const Banner = ({ room, corporate = false }) => {
           )}
         </div>
       </CommonModal>
-      <header className="esc-header section-padding">
+      <header className="esc-header pt-80">
         <div className="container">
-          <div className="row align-items-center">
+          <div className="row">
             <div className="col-lg-5 col-12 text-center">
               <div className="esc-banner-img">
                 <Image
@@ -62,7 +62,7 @@ const Banner = ({ room, corporate = false }) => {
                 />
               </div>
             </div>
-            <div className="col-lg-6 offset-lg-1 col-12">
+            <div className="col-lg-7 col-12">
               <div className="esc-banner-content">
                 {corporate ? (
                   <>

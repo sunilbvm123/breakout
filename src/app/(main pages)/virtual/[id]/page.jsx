@@ -118,7 +118,7 @@ const page = () => {
             </div>
           </section>
         )}
-        <Image src={hmIllus} className="w-100 h-auto" alt="hm-text-bg" />
+        <Image src={hmIllus} className="illus-image" alt="hm-text-bg" />
       </div>
       <div className="black-gr-div">
         <PartyExpertCon className="pt-80" data="virtual_subpage"/><br/><br/>
@@ -129,13 +129,13 @@ const page = () => {
         {room?.faqsection && room?.faqsection.length > 0 && (
           <FaqSection data={room?.faqsection} />
         )}
-        <Image src={illus3} className="w-100 h-auto" alt="illus3" />
+        <Image src={illus3} className="illus-image" alt="illus3" />
       </div>
 
       {/* <FaqSection /> */}
       <div className="black-gr-div">
         {escapeRooms && escapeRooms.length > 0 && (
-          <section className="section-padding esc-section">
+          <section className="sec-padding-top esc-section">
             <div className="container">
               <div className="row">
                 <div className="col-lg-12 text-center col-12">
@@ -144,7 +144,7 @@ const page = () => {
                   </h2>
                 </div>
               </div>
-              <div className="row mt-5 row-gap-25" id="escape-rooms-section">
+              <div className="row row-gap-25" id="escape-rooms-section">
                 {escapeRooms &&
                   escapeRooms.map((room, index) => (
                     <div className="col-lg-4 col-12" 

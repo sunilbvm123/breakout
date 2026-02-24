@@ -282,7 +282,7 @@ const Footer = () => {
             links: [
               ...escaperoomLocations.map((loc) => ({
                 title: loc.title,
-                link: `/locations/${loc.slug}`,
+                link: `/${loc.slug}`,
               })),
               {
                 title: "Virtual Rooms",

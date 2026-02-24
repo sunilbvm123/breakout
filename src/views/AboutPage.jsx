@@ -552,7 +552,7 @@ const AboutPage = () => {
                       {escaperoomLocations &&
                         escaperoomLocations?.map((link, index) => (
                           <li key={index}>
-                            <Link href={`/locations/${link.slug}`}>
+                            <Link href={`/${link.slug}`}>
                               <span>{link.title}</span>
                               <Image src={whArrow} alt={link.title} />
                             </Link>

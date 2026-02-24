@@ -196,7 +196,7 @@ export default function Home() {
 
 
   const [data, setData] = useState(null);
-  // const [pageLoading, setPageLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
     const shouldScroll = sessionStorage.getItem("home_about_us_heading_key");
@@ -243,14 +243,14 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // setPageLoading(true);
+        setPageLoading(true);
         const response = await api.get("/home-page");
         const homeData = response?.data?.data;
         setData(homeData);
       } catch (err) {
         console.error("Error fetching home page:", err);
       } finally {
-        // setPageLoading(false);
+        setPageLoading(false);
       }
     };
     fetchData();
@@ -273,12 +273,12 @@ export default function Home() {
 
   return (
     <>
-      {/* {
+      {
         pageLoading && (
           <div id="preloader">
             <div className="loader"></div>
           </div>
-        ) }  */}
+        ) } 
           <>
             {data && data?.bannersection && (
               <header className="hm-header">
@@ -338,7 +338,7 @@ export default function Home() {
                                 <li key={index}
                                   onClick={() => { sessionStorage.setItem("home_set_yourself_free_key", true) }
                                   }>
-                                  <Link href={`/locations/${link.slug}`}>
+                                  <Link href={`/${link.slug}`}>
                                     <span>{link.title}</span>
                                     <Image src={whArrow} alt={link.title} />
                                   </Link>

@@ -83,7 +83,7 @@ const page = () => {
     useEffect(() => {
       const shouldScroll = sessionStorage.getItem("scrollToEscapeRooms");
   
-      if (shouldScroll === "true" && escapeRooms?.length > 0) {
+      if (shouldScroll == "true") {
         // wait for DOM paint
         setTimeout(() => {
           const section = document.getElementById("escape-rooms-section");
@@ -97,7 +97,7 @@ const page = () => {
   
           // remove key so it doesn't auto-scroll again
           sessionStorage.removeItem("scrollToEscapeRooms");
-        }, 500);
+        }, 1000);
       }
     }, [escapeRooms]);
   
@@ -263,7 +263,7 @@ const page = () => {
 
       <div className="black-gr-div">
         {rooms?.gallery_images && rooms?.gallery_images?.length > 0 ? (
-          <section className="sec-padding-top section-padding gallery-sec">
+          <section className="sec-padding-top section-padding gallery-sec pb-0">
             <div className="" style={{ overflow: "hidden" }}>
               <div className="row">
                 <div className="col-lg-12">
@@ -273,7 +273,7 @@ const page = () => {
             </div>
           </section>
         ):(
-        <section className="sec-padding-top section-padding gallery-sec">
+        <section className="sec-padding-top section-padding gallery-sec pb-0">
         <StripGallery images={abImages} />
       </section>
         )
