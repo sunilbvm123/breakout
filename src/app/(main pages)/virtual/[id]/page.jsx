@@ -126,6 +126,7 @@ const page = () => {
           <GReviewSlider commonStars={false} data={room?.googlereviews} />
         )}
         {/* <ReserveASlot room={room?.pricingsection} /> */}
+        <br/>
         {room?.faqsection && room?.faqsection.length > 0 && (
           <FaqSection data={room?.faqsection} />
         )}

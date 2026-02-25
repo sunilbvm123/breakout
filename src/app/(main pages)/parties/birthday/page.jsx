@@ -229,12 +229,11 @@ const page = () => {
               {data?.bannersection?.note && (
                 <div className="container">
                   <div className="bday-text-wrap" >
-                    <Link
-                      href={`/founder-message/birthday-party`} 
+                    <p
+                      // href={`/founder-message/birthday-party`} 
                       className="underline-big-text yellow-text"
-                    >
-                      {data?.bannersection?.note}
-                    </Link>
+                      dangerouslySetInnerHTML={{ __html: data?.bannersection?.note }}
+                    />
                   </div>
                 </div>
               )}

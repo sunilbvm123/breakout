@@ -14,7 +14,7 @@ const InnerPageBanner = ({ banner, bdayInner }) => {
   const trailerBtnRef = useRef(null);
 
   const renderImageOrVideo = (image) => {
-    if (typeof image === "string" && image) {
+    if (typeof image == "string" && image) {
       if (
         image.includes(".mp4") ||
         image.includes(".webm") ||

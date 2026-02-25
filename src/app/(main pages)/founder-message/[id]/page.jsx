@@ -13,20 +13,23 @@ import PartyExpertCon from "@/components/PartyExpertCon";
 
 export async function getData(id) {
   try {
-    const [founderMessage] = await Promise.all([
-      api.get(`/whybirthdaymatter/${id}`),
-    ]);
+    const res = await api.get(`/whybirthdaymatter/${id}`);
     return {
-      founderMessage: founderMessage.data.data,
+      founderMessage: res?.data?.data || null,
     };
   } catch (error) {
-    notFound();
+    console.error("API Error:", error);
+    return {
+      founderMessage: null,
+    };
   }
 }
 
 const SigngleBlog = async ({ params }) => {
   const { id } = params;
-  const { founderMessage } = await getData(id);
+  console.log("sdfmnsdbnfjbsdjfhgsjdfh",id)
+  const data = await getData(id);
+  const founderMessage = data?.founderMessage || null;
   console.log("founderMessage_founderMessage", founderMessage)
   const images =
     founderMessage?.images && founderMessage?.images?.length > 1

@@ -45,6 +45,7 @@ const page = () => {
   console.log("escapeRooms_123", escapeRooms)
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [brandLogos, setBrandLogos] = useState(null);
   const [abImages, setAbImages] = useState([
     abImg1,
     abImg2,
@@ -81,9 +82,20 @@ const page = () => {
         setLoading(false);
       }
     };
-  
+    const fetchBrandLogos = async () => {
+      try {
+        const response = await api.get("logos/brands");
+        setBrandLogos(response?.data?.data);
+        console.log("skldfjhsjkdfhskhfshf",response?.data?.data)
+      } catch (error) {
+        console.error("Error fetching brand logos:", error);
+      }
+    };
     fetchAllData();
+    fetchBrandLogos();
   }, []);
+
+  
 
   const hmText =
     "In a typical escape room, your team is <span>locked in a themed room</span> You have a <span>set time.</span> You must <span>find clues,</span> solve puzzles To <span>escape</span> from the locked room.";
@@ -145,6 +157,12 @@ const page = () => {
               {rooms?.countersection && (
                 <TrustedSection className="pb-0" data={rooms?.countersection} />
               )}
+                <LogoSec className="pt-80 pb-0"
+                // title={"<span>Brands</span> Hosted"}
+                title={"<span>Brands</span> Hosted"}
+                logos={brandLogos}
+                link={false}
+              />
               {rooms?.iconsection && (
                 <section className="icon-sec section-padding pb-0">
                   <div className="container">
