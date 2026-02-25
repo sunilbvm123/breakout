@@ -77,11 +77,30 @@ const boxItems = [
 const Page = async ({ params }) => {
   const { id } = await params;
   const { rooms, brands } = await getData(id);
-  console.log("rooms?.contentsection?.content",rooms)
+  console.log("rooms?.contentsection?.content",id)
+  // const escapeRoomsExtreme =
+  //   rooms?.escapeRooms?.filter((room) => room?.tag == "Extreme") || [];
+  // const escapeRoomsUltra =
+  //   rooms?.escapeRooms?.filter((room) => room?.tag == "Ultra") || [];
   const escapeRoomsExtreme =
-    rooms?.escapeRooms?.filter((room) => room?.tag === "Extreme") || [];
-  const escapeRoomsUltra =
-    rooms?.escapeRooms?.filter((room) => room?.tag === "Ultra") || [];
+  rooms?.escapeRooms?.filter((room) => {
+    try {
+      const tags = JSON.parse(room?.tag || "[]");
+      return tags.includes("Extreme");
+    } catch {
+      return false;
+    }
+  }) || [];
+
+const escapeRoomsUltra =
+  rooms?.escapeRooms?.filter((room) => {
+    try {
+      const tags = JSON.parse(room?.tag || "[]");
+      return tags.includes("Ultra");
+    } catch {
+      return false;
+    }
+  }) || [];
   return (
     <>
       <Header />
@@ -192,12 +211,12 @@ const Page = async ({ params }) => {
               <div className="row">
                 <div className="col-lg-12 text-center">
                   <h3 className="sec-head medium sm-head">
-                    <span>Escape Rooms</span> in Koramangala
+                    <span>Escape Rooms</span> in Bangalore
                   </h3>
                 </div>
               </div>
               {
-                id != "escape-room-bangalore-page" && (
+                id != "things-to-do-in-bangalore" && (
                   <>
                    {escapeRoomsExtreme && escapeRoomsExtreme?.length > 0 && (
                 <div className="row row-gap-25 mt-5">
@@ -215,7 +234,7 @@ const Page = async ({ params }) => {
                 </div>
               )}
               {escapeRoomsUltra && escapeRoomsUltra?.length > 0 && (
-                <div className="row row-gap-25">
+                <div className="row row-gap-25 mt-3">
                   <div className="col-12">
                     <h3 className="sec-head medium sm-head text-center">
                       At <span>Ultra</span>
@@ -234,7 +253,7 @@ const Page = async ({ params }) => {
              
 
               {
-                id == "escape-room-bangalore-page" && (
+                id == "things-to-do-in-bangalore" && (
                   <div className="row row-gap-25">
                  
                   {rooms?.escapeRooms?.map((room, index) => (
