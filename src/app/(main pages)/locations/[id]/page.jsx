@@ -36,6 +36,7 @@ import { useGlobalContext } from "@/context/GlobalContext";
 
 const page = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  console.log("sjkdfksdhfhskjf",openFaqIndex)
   const { gettncs } = useGlobalContext();
 
   const escaperoomsTnc = gettncs?.find(
@@ -84,6 +85,7 @@ const page = () => {
   const { id } = useParams();
   console.log("location_slug", id)
   const [location, setLocation] = useState(null);
+  console.log("skdfhsdjkfhksdhfhsdf",location?.title)
   const [loading, setLoading] = useState(true);
   const [showLocation, setShowLocation] = useState(false);
 
@@ -255,13 +257,13 @@ const page = () => {
   //   return () => clearTimeout(timer); // cleanup
   // }, []);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShowLocation(true);
-  //   }, 2000); // 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLocation(true);
+    }, 2000); // 3 seconds
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
 
   return (
@@ -304,7 +306,7 @@ const page = () => {
                 </section>
               )}
 
-              {location && location?.escaperooms?.ultra?.length > 0 && (
+              {location && location?.escaperooms?.ultra?.length > 0 && id == "koramangala" && (
                 <>
                   <section id="escape-rooms-ultra" className="section-padding esc-sec pb-0">
                     <div className="container">

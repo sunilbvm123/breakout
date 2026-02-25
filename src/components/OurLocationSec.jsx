@@ -37,7 +37,7 @@ const OurLocationSec = ({ title, slug = null, locationTitle = "", className = ""
         const res = await api.get(`/escaperoom-location/${selectedLocation}`);
         console.log("banner section", res.data.data);
         setLocationData(res.data?.data?.locationdetails);
-        console.log("setLocationData_setLocationData",res.data?.data?.locationdetails)
+        console.log("setLocationData_setLocationData",res)
       };
       fetchLocation();
     }

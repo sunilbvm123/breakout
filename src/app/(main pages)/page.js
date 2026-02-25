@@ -270,15 +270,35 @@ export default function Home() {
   //   return <div className="loading-container"></div>;
   // }
 
+  useEffect(() => {
+    const shouldScroll = sessionStorage.getItem("visit_location_key");
+
+    if (shouldScroll == "true") {
+      // wait for DOM paint
+      setTimeout(() => {
+        const section = document.getElementById("visit-location-section");
+
+        if (section) {
+          section.scrollIntoView({
+            behavior: "auto", // use "smooth" if you want animation
+            block: "start",
+          });
+        }
+
+        // remove key so it doesn't auto-scroll again
+        sessionStorage.removeItem("visit_location_key");
+      }, 1000);
+    }
+  }, [data]);
 
   return (
     <>
       {
-        pageLoading && (
+        pageLoading ? (
           <div id="preloader">
             <div className="loader"></div>
           </div>
-        ) } 
+        ) : (
           <>
             {data && data?.bannersection && (
               <header className="hm-header">
@@ -470,7 +490,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="black-gr-div" id="kuch-bhi">
+            <div className="black-gr-div" id="kuch-bhi" >
               {data && data?.countersection && (
                 <TrustedSection className="pb-0" data={data?.countersection} />
               )}
@@ -482,8 +502,8 @@ export default function Home() {
                 alt="illus-home"
               />
             </div>
-            <div className="black-gr-div">
-              <VisitLocations title="Visit <span>a Location</span>" page_name="home" />
+            <div className="black-gr-div" >
+              <VisitLocations title="Visit <span>a Location</span>" onClick={() => { sessionStorage.setItem("home_visit_location_key", true) }} page_name="home" id="visit-location-section" />
               <div className="home-faq">
                 {data && data?.faqsection &&
                   <FaqSection className="sec-padding-top" data={data?.faqsection} />}
@@ -569,8 +589,9 @@ export default function Home() {
               )}
             </div>
           </>
-        
-     
+        )}
+
+
 
     </>
   );

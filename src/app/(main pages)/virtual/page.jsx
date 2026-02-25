@@ -40,11 +40,11 @@ import abImg3 from "@/images/gal3.png";
 
 const page = () => {
   const [rooms, setRooms] = useState([]);
-  console.log("escapeRooms_page_page",rooms)
+  console.log("escapeRooms_page_page", rooms)
   const [escapeRooms, setEscapeRooms] = useState(null);
-  console.log("escapeRooms_123",escapeRooms)
+  console.log("escapeRooms_123", escapeRooms)
   const router = useRouter();
-
+  const [loading, setLoading] = useState(true);
   const [abImages, setAbImages] = useState([
     abImg1,
     abImg2,
@@ -63,256 +63,275 @@ const page = () => {
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await api.get("/virtual-escaperoom");
-      setRooms(res.data.data);
+    const fetchAllData = async () => {
+      try {
+        setLoading(true);
+  
+        const [roomsRes, gamesRes] = await Promise.all([
+          api.get("/virtual-escaperoom"),
+          api.get("/virtual-games"),
+        ]);
+  
+        setRooms(roomsRes.data.data);
+        setEscapeRooms(gamesRes.data.data);
+  
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
-
-    const fetchEscapeRooms = async () => {
-      const res = await api.get("/virtual-games");
-      setEscapeRooms(res.data.data);
-    };
-
-    fetchData();
-    fetchEscapeRooms();
+  
+    fetchAllData();
   }, []);
 
   const hmText =
     "In a typical escape room, your team is <span>locked in a themed room</span> You have a <span>set time.</span> You must <span>find clues,</span> solve puzzles To <span>escape</span> from the locked room.";
 
-    useEffect(() => {
-      const shouldScroll = sessionStorage.getItem("scrollToEscapeRooms");
-  
-      if (shouldScroll == "true") {
-        // wait for DOM paint
-        setTimeout(() => {
-          const section = document.getElementById("escape-rooms-section");
-  
-          if (section) {
-            section.scrollIntoView({
-              behavior: "auto", // use "smooth" if you want animation
-              block: "start",
-            });
-          }
-  
-          // remove key so it doesn't auto-scroll again
-          sessionStorage.removeItem("scrollToEscapeRooms");
-        }, 1000);
-      }
-    }, [escapeRooms]);
-  
-  
-    
+  useEffect(() => {
+    const shouldScroll = sessionStorage.getItem("scrollToEscapeRooms");
+
+    if (shouldScroll == "true") {
+      // wait for DOM paint
+      setTimeout(() => {
+        const section = document.getElementById("escape-rooms-section");
+
+        if (section) {
+          section.scrollIntoView({
+            behavior: "auto", // use "smooth" if you want animation
+            block: "start",
+          });
+        }
+
+        // remove key so it doesn't auto-scroll again
+        sessionStorage.removeItem("scrollToEscapeRooms");
+      }, 1000);
+    }
+  }, [escapeRooms]);
+
+
+
 
   return (
     <>
-      {rooms?.bannersection && (
-        <InnerPageBanner banner={rooms?.bannersection} bdayInner={true} />
-      )}
-      <div className="black-gr-div">
-        {rooms?.contentsection && (
-          <>
-            <HmTextSec className="section-padding pb-0" text={rooms?.contentsection?.content} />
-            <div className="container">
-              <div className="bday-text-wrap">
-                <p
-                  className="underline-big-text"
-                  // onClick={() => router.push("/founder-message/corporate-page")}
-                  style={{ cursor: "pointer" }}
-                  dangerouslySetInnerHTML={{
-                    __html: rooms?.contentsection?.note,
-                  }}
-                ></p>
-              </div>
-            </div>
-          </>
-        )}
-        {rooms?.countersection && (
-          <TrustedSection className="pb-0" data={rooms?.countersection} />
-        )}
-        {rooms?.iconsection && (
-          <section className="icon-sec section-padding pb-0">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-12 text-center">
-                  <h3
-                    className="sec-head medium sm-head"
-                    dangerouslySetInnerHTML={{
-                      __html: rooms?.iconsection?.heading,
-                    }}
-                  />
-                  <div className="box-grid-6">
-                    {rooms?.iconsection?.icons?.length > 0 &&
-                      rooms?.iconsection?.icons.map((item, index) => (
-                        <div className="box-grid-item" key={index}>
-                          <div className="box-item">
-                            <div
-                              className="box-item-icon"
-                              data-text={index + 1}
-                            >
-                              {item?.image && (
-                                <Image
-                                  src={item.image}
-                                  width={100}
-                                  height={100}
-                                  alt="enc"
-                                />
-                              )}
-                            </div>
-                            <div className="box-item-content">
-                              <h4 className="sec-head medium-20 mb-0">
-                                {item?.heading}
-                              </h4>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        <PartyExpertCon className="" data="virtual"/>
-
-        <Image
-          src={virtualIllus}
-          alt="illus3"
-          className="illus-image"
-        />
-      </div>
-      <div className="black-gr-div" id="escape-rooms-section">
-        <section className="sec-padding-top esc-sec">
-          <div className="container">
-            <div className="row" >
-              <div className="col-lg-12 text-center">
-                <h3 className="sec-head medium sm-head">
-                  Virtual <span>Escape Rooms</span>
-                </h3>
-              </div>
-            </div>
-            <div className="row row-gap-25" >
-              {escapeRooms &&
-                escapeRooms
-                  .filter((room) => room.slug !== "code-breakers")
-                  .map((room, index) => (
-                    <div className="col-lg-4 col-12" onClick={()=> sessionStorage.setItem("scrollToEscapeRooms", true)} key={index}>
-                      <EscapeRoomCard hasVirtual={true} room={room} />
-                    </div>
-                  ))}
-            </div>
+      {
+        loading ? (
+          <div id="preloader">
+            <div className="loader"></div>
           </div>
-        </section>
-
-        {rooms?.addonsection && (
-          <section className="addon-sec pt-80">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-12 text-center">
-                  <h3
-                    className="sec-head medium sm-head"
-                    dangerouslySetInnerHTML={{
-                      __html: rooms?.addonsection?.heading,
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="row row-gap-25 justify-content-center">
-                {rooms?.addonsection?.icons?.length > 0 &&
-                  rooms?.addonsection?.icons.map((item, index) => (
-                    <div className="col-lg-3 col-12" key={index}>
-                      <div
-                        className="location-card "
-                        onClick={() => router.push(item.link)}
+        ) : (
+          <>
+            {rooms?.bannersection && (
+              <InnerPageBanner banner={rooms?.bannersection} bdayInner={true} />
+            )}
+            <div className="black-gr-div">
+              {rooms?.contentsection && (
+                <>
+                  <HmTextSec className="section-padding pb-0" text={rooms?.contentsection?.content} />
+                  <div className="container">
+                    <div className="bday-text-wrap">
+                      <p
+                        className="underline-big-text"
+                        // onClick={() => router.push("/founder-message/corporate-page")}
                         style={{ cursor: "pointer" }}
-                      >
-                        <div className="location-card-img">
-                          {item.image && item.image != "" && (
-                            <Image
-                              src={item.image}
-                              width={500}
-                              height={500}
-                              alt={item.heading}
-                            />
-                          )}
-                        </div>
-                        <div className="location-card-content">
-                          <h3
-                            dangerouslySetInnerHTML={{ __html: item.heading }}
-                          ></h3>
+                        dangerouslySetInnerHTML={{
+                          __html: rooms?.contentsection?.note,
+                        }}
+                      ></p>
+                    </div>
+                  </div>
+                </>
+              )}
+              {rooms?.countersection && (
+                <TrustedSection className="pb-0" data={rooms?.countersection} />
+              )}
+              {rooms?.iconsection && (
+                <section className="icon-sec section-padding pb-0">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-lg-12 text-center">
+                        <h3
+                          className="sec-head medium sm-head"
+                          dangerouslySetInnerHTML={{
+                            __html: rooms?.iconsection?.heading,
+                          }}
+                        />
+                        <div className="box-grid-6">
+                          {rooms?.iconsection?.icons?.length > 0 &&
+                            rooms?.iconsection?.icons.map((item, index) => (
+                              <div className="box-grid-item" key={index}>
+                                <div className="box-item">
+                                  <div
+                                    className="box-item-icon"
+                                    data-text={index + 1}
+                                  >
+                                    {item?.image && (
+                                      <Image
+                                        src={item.image}
+                                        width={100}
+                                        height={100}
+                                        alt="enc"
+                                      />
+                                    )}
+                                  </div>
+                                  <div className="box-item-content">
+                                    <h4 className="sec-head medium-20 mb-0">
+                                      {item?.heading}
+                                    </h4>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
                         </div>
                       </div>
                     </div>
-                  ))}
-              </div>
+                  </div>
+                </section>
+              )}
+
+              <PartyExpertCon className="" data="virtual" />
+
+              <Image
+                src={virtualIllus}
+                alt="illus3"
+                className="illus-image"
+              />
             </div>
-          </section>
-        )}
-
-        {rooms?.packagesection && (
-          <Packages className="pb-0" hasEventImg={true} packages={rooms?.packagesection} />
-        )}
-
-        <Image
-          src={virtualIllus1}
-          alt="illus3"
-          className="illus-image"
-        />
-      </div>
-
-      <div className="black-gr-div">
-        {rooms?.gallery_images && rooms?.gallery_images?.length > 0 ? (
-          <section className="sec-padding-top section-padding gallery-sec pb-0">
-            <div className="" style={{ overflow: "hidden" }}>
-              <div className="row">
-                <div className="col-lg-12">
-                  <StripGallery images={rooms?.gallery_images} />
+            <div className="black-gr-div" id="escape-rooms-section">
+              <section className="sec-padding-top esc-sec">
+                <div className="container">
+                  <div className="row" >
+                    <div className="col-lg-12 text-center">
+                      <h3 className="sec-head medium sm-head">
+                        Virtual <span>Escape Rooms</span>
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="row row-gap-25" >
+                    {escapeRooms &&
+                      escapeRooms
+                        .filter((room) => room.slug !== "code-breakers")
+                        .map((room, index) => (
+                          <div className="col-lg-4 col-12" onClick={() => sessionStorage.setItem("scrollToEscapeRooms", true)} key={index}>
+                            <EscapeRoomCard hasVirtual={true} room={room} />
+                          </div>
+                        ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          </section>
-        ):(
-        <section className="sec-padding-top section-padding gallery-sec pb-0">
-        <StripGallery images={abImages} />
-      </section>
-        )
-      }
-        <br/>
-        {rooms?.googlereviews && rooms?.googlereviews?.length > 0 && (
-          <GReviewSlider commonStars={false} data={rooms?.googlereviews} />
-        )}
+              </section>
 
-        {rooms?.videotestimonials && (
-          <Videotestimonials data={rooms?.videotestimonials} />
-        )}
-        {rooms?.faqsection && rooms?.faqsection?.length > 0 && (
-          <FaqSection className="section-padding pb-0" data={rooms?.faqsection} />
-        )}
-        <BlogSlider className="pb-0"/>
-        {/* <HomeContact
+              {rooms?.addonsection && (
+                <section className="addon-sec pt-80">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-lg-12 text-center">
+                        <h3
+                          className="sec-head medium sm-head"
+                          dangerouslySetInnerHTML={{
+                            __html: rooms?.addonsection?.heading,
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="row row-gap-25 justify-content-center">
+                      {rooms?.addonsection?.icons?.length > 0 &&
+                        rooms?.addonsection?.icons.map((item, index) => (
+                          <div className="col-lg-3 col-12" key={index}>
+                            <div
+                              className="location-card "
+                              onClick={() => router.push(item.link)}
+                              style={{ cursor: "pointer" }}
+                            >
+                              <div className="location-card-img">
+                                {item.image && item.image != "" && (
+                                  <Image
+                                    src={item.image}
+                                    width={500}
+                                    height={500}
+                                    alt={item.heading}
+                                  />
+                                )}
+                              </div>
+                              <div className="location-card-content">
+                                <h3
+                                  dangerouslySetInnerHTML={{ __html: item.heading }}
+                                ></h3>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {rooms?.packagesection && (
+                <Packages className="pb-0" hasEventImg={true} packages={rooms?.packagesection} />
+              )}
+
+              <Image
+                src={virtualIllus1}
+                alt="illus3"
+                className="illus-image"
+              />
+            </div>
+
+            <div className="black-gr-div">
+              {rooms?.gallery_images && rooms?.gallery_images?.length > 0 ? (
+                <section className="sec-padding-top section-padding gallery-sec pb-0">
+                  <div className="" style={{ overflow: "hidden" }}>
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <StripGallery images={rooms?.gallery_images} />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              ) : (
+                <section className="sec-padding-top section-padding gallery-sec pb-0">
+                  <StripGallery images={abImages} />
+                </section>
+              )
+              }
+              <br />
+              {rooms?.googlereviews && rooms?.googlereviews?.length > 0 && (
+                <GReviewSlider commonStars={false} data={rooms?.googlereviews} />
+              )}
+
+              {rooms?.videotestimonials && (
+                <Videotestimonials data={rooms?.videotestimonials} />
+              )}
+              {rooms?.faqsection && rooms?.faqsection?.length > 0 && (
+                <FaqSection className="section-padding pb-0" data={rooms?.faqsection} />
+              )}
+              <BlogSlider className="pb-0" />
+              {/* <HomeContact
           img={virtualIllus2}
           textData={rooms?.footersection}
           LookingForOptions={lookingForOptions}
         /> */}
-        <LogoSec className="pt-80 pb-0"
-          title={"<span>In the</span> News"}
-          logo={rooms?.brandlogos}
-          link={false}
-        />
-        {rooms?.footersection && (
-          <BirthdayGetInTouch
-            img={virtualIllus2}
-            textData={rooms?.footersection}
-            noTextBottom={true}
-            atOptions={lookingForOptions}
-            privacyLine={true}
-          />
-        )}
-      </div>
+              <LogoSec className="pt-80 pb-0"
+                title={"<span>In the</span> News"}
+                logo={rooms?.brandlogos}
+                link={false}
+              />
+              {rooms?.footersection && (
+                <BirthdayGetInTouch
+                  img={virtualIllus2}
+                  textData={rooms?.footersection}
+                  noTextBottom={true}
+                  atOptions={lookingForOptions}
+                  privacyLine={true}
+                />
+              )}
+            </div>
 
-      {/* <PeakExpSec /> */}
-      {/* </div> */}
+            {/* <PeakExpSec /> */}
+            {/* </div> */}
+          </>
+        )
+      }
+
     </>
   );
 };

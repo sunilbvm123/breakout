@@ -27,8 +27,8 @@ const PartyInclutions = ({ data }) => {
               initialSlide={4}
               loop={true}
               navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".button-next",
+                prevEl: ".button-prev",
               }}
               breakpoints={{
                 0: {
@@ -53,11 +53,11 @@ const PartyInclutions = ({ data }) => {
                   </SwiperSlide>
                 ))}
             </Swiper>
-            <div className="swiper-button-prev custom-prev go-plan">
+            <div className="button-prev custom-prev go-plan">
               <Image src={swiperPrev} alt="Previous" />
             </div>
 
-            <div className="swiper-button-next custom-next go-plan">
+            <div className="button-next custom-next go-plan">
               <Image src={swiperNext} alt="Next" />
             </div>
           </div>

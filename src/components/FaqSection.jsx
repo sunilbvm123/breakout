@@ -16,7 +16,7 @@ const FaqSection = ({ data, openIndex, onFaqChange, className = "" }) => {
   const [shouldAutoScroll, setShouldAutoScroll] = useState(false);
 
   const dummyFaqItems = [];
-
+console.log("FaqSection_FaqSection",openIndex)
   const faqItems =
     data?.length > 0
       ? data.map((item, index) => ({
@@ -36,8 +36,11 @@ const FaqSection = ({ data, openIndex, onFaqChange, className = "" }) => {
       setShowAll(true);
       setActiveKey(openIndex.toString());
       setShouldAutoScroll(true);
+  
+      // ✅ RESET PARENT IMMEDIATELY
+      onFaqChange?.(null);
     }
-  }, [openIndex, faqItems]);
+  }, [openIndex]);
 
   /* ========================= SCROLL ONLY WHEN REQUIRED ========================= */
   useEffect(() => {
@@ -77,7 +80,7 @@ const FaqSection = ({ data, openIndex, onFaqChange, className = "" }) => {
               activeKey={activeKey}
               onSelect={(key) => {
                 setActiveKey((prev) => (prev === key ? null : key));
-                onFaqChange?.(key !== null ? Number(key) : null);
+                // onFaqChange?.(key !== null ? Number(key) : null);
               }}
             >
               {visibleFaqs.map((item, index) => {

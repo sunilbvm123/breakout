@@ -86,10 +86,10 @@ const page = () => {
   const birthdayTnc = gettncs?.find(
     (item) => item.reference == "birthdays"
   );
-  
+
   console.log("Birthday T&C:", birthdayTnc);
 
- 
+
 
 
   useEffect(() => {
@@ -282,7 +282,8 @@ const page = () => {
                       {party?.partyinclusions?.images &&
                         party?.partyinclusions?.images?.length > 0 &&
                         party?.partyinclusions?.images?.map((bd, index) => (
-                          <div className="col-lg-3 col-12" key={index}>
+                          <Link href={bd.link} key={index} className="col-lg-3 col-12" target="_blank">
+
                             <div className="location-card">
                               <div className="location-card-img">
                                 {bd.image && (
@@ -300,7 +301,8 @@ const page = () => {
                                 />
                               </div>
                             </div>
-                          </div>
+
+                          </Link>
                         ))}
                     </div>
                   </div>
@@ -310,7 +312,7 @@ const page = () => {
               {party &&
                 party?.packagesection &&
                 party?.packagesection?.pricing?.columns?.length > 0 && (
-                  <Packages className="pb-0" packages={party?.packagesection} category="birthday" data={birthdayTnc}/>
+                  <Packages className="pb-0" packages={party?.packagesection} category="birthday" data={birthdayTnc} />
                 )}
               {party && party?.googlereviews && (
                 <div className="pt-80">

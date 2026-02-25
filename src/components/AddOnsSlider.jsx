@@ -86,8 +86,8 @@ const AddOnsSlider = ({ data, className = "" }) => {
                 clickable: true,
               }}
               navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".add-button-next",
+                prevEl: ".add-button-prev",
               }}
               slidesPerView={1}
               spaceBetween={20}
@@ -156,11 +156,11 @@ const AddOnsSlider = ({ data, className = "" }) => {
                   </SwiperSlide>
                 ))} */}
             </Swiper>
-            <div className="swiper-button-prev custom-prev go-plan">
+            <div className="add-button-prev custom-prev go-plan">
               <Image src={swiperPrev} alt="Previous" />
             </div>
 
-            <div className="swiper-button-next custom-next go-plan">
+            <div className="add-button-next custom-next go-plan">
               <Image src={swiperNext} alt="Next" />
             </div>
 

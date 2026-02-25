@@ -304,7 +304,7 @@ const page = () => {
                 </section>
               )}
 
-              {location && location?.escaperooms?.ultra?.length > 0 && (
+              {location && location?.escaperooms?.ultra?.length > 0 && (location?.title == "Koramangala" || id == "koramangala") && (
                 <>
                   <section id="escape-rooms-ultra" className="section-padding esc-sec pb-0">
                     <div className="container">
@@ -437,6 +437,7 @@ const page = () => {
                                     href={item?.cta_link}
                                     // href={"/parties"}
                                     className="link-btn"
+                                    target="_blank"
                                     onClick={() =>
                                       sessionStorage.setItem("location_know_more", "true")
                                     }

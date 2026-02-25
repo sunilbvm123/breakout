@@ -48,6 +48,7 @@ const page = () => {
         setRoom(roomRes?.data?.data);
         console.log("Room Data:", roomRes?.data?.data);
       } catch (err) {
+        setLoading(false);
         console.error("Error fetching escape room data:", err);
       } finally {
         setLoading(false);

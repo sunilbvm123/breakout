@@ -56,12 +56,10 @@ const BlogSlider = ({ className = "" }) => {
           <div className="col-lg-12">
             <div className="blog-slider">
               <Swiper
-
                 modules={[Navigation]}
-
                 navigation={{
-                  nextEl: ".swiper-button-next",
-                  prevEl: ".swiper-button-prev",
+                  nextEl: ".blog-swiper-next",
+                  prevEl: ".blog-swiper-prev",
                 }}
                 centeredSlides={true}
                 slidesPerView={1.3}
@@ -90,14 +88,14 @@ const BlogSlider = ({ className = "" }) => {
               {/* Navigation buttons */}
               <div
                 ref={prevRef}
-                className="swiper-button-prev custom-prev go-plan"
+                className="blog-swiper-prev custom-prev go-plan"
               >
                 <Image src={swiperPrev} alt="Previous" />
               </div>
 
               <div
                 ref={nextRef}
-                className="swiper-button-next custom-next go-plan"
+                className="blog-swiper-next custom-next go-plan"
               >
                 <Image src={swiperNext} alt="Next" />
               </div>
