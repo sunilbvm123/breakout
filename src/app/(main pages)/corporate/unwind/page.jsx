@@ -90,6 +90,7 @@ const page = () => {
   const [brandLogos, setBrandLogos] = useState(null);
   const [loading, setLoading] = useState(true);
   const { gettncs } = useGlobalContext();
+  console.log("sjkdfhjsdhfhsdfhsdf_gettncs",gettncs)
   const corporateTnc = gettncs?.find(
     (item) => item.reference == "corporate"
   );

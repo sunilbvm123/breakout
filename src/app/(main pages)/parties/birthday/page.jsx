@@ -148,7 +148,7 @@ const page = () => {
   ];
 
   const [data, setData] = useState(null);
-  console.log("party_inclustion_data", data)
+  console.log("party_inclustion_data", data?.footersection)
   const [birthdayList, setBirthdayList] = useState(null);
 
 
@@ -383,7 +383,7 @@ const page = () => {
                 <PartyGetInTouch
                   img={nightIllus}
                   data={data?.footersection}
-                  noTextBottom={true}
+                  // noTextBottom={true}
                   privacyLine={true}
                 />
               )}

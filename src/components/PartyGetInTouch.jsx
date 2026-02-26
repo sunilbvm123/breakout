@@ -593,7 +593,8 @@ const PartyGetInTouch = ({
           </p>
         )}
       </div>
-      {/* {noTextBottom && (
+      <br/>
+      {noTextBottom && (
         <section className="">
           <div className="container">
             <div className="row text-center justify-content-center">
@@ -616,7 +617,7 @@ const PartyGetInTouch = ({
             </div>
           </div>
         </section>
-      )} */}
+      )}
       {!noImage ? (
         !img ? (
           home ? (

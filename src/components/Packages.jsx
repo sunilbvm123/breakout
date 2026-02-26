@@ -311,7 +311,7 @@ const Packages = ({ packages, hasEventImg = false, category = "", data = {}, cla
                 ></p>
 
               )}
-              {
+              {/* {
                 (category == "birthday" || category == "corporate") && (
                   <Link
                     href="#"
@@ -321,7 +321,16 @@ const Packages = ({ packages, hasEventImg = false, category = "", data = {}, cla
                     <span>T&C Apply</span>
                   </Link>
                 )
-              }
+              } */}
+             
+                  <Link
+                    href="#"
+                    className="main-btn dark-btn"
+                    onClick={() => setShow1(true)}
+                  >
+                    <span>T&C Apply</span>
+                  </Link>
+                
 
             </div>
           </div>

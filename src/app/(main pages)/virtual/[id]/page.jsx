@@ -121,14 +121,16 @@ const page = () => {
         <Image src={hmIllus} className="illus-image" alt="hm-text-bg" />
       </div>
       <div className="black-gr-div">
-        <PartyExpertCon className="pt-80" data="virtual_subpage"/><br/><br/>
+        <PartyExpertCon className="sec-padding-top" data="virtual_subpage"/>
         {room?.googlereviews && room?.googlereviews.length > 0 && (
+          <div className="pt-80">
           <GReviewSlider commonStars={false} data={room?.googlereviews} />
+          </div>
         )}
         {/* <ReserveASlot room={room?.pricingsection} /> */}
-        <br/>
+        
         {room?.faqsection && room?.faqsection.length > 0 && (
-          <FaqSection data={room?.faqsection} />
+          <FaqSection className="section-padding pb-0" data={room?.faqsection} />
         )}
         <Image src={illus3} className="illus-image" alt="illus3" />
       </div>

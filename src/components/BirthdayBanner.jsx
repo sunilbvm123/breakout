@@ -91,7 +91,8 @@ const BirthdayBanner = ({
       return (
         <video
           className="banner-media"
-          src="/videos/founder-video.mp4"
+          // src="/videos/founder-video.mp4"
+          src={media}
           autoPlay
           muted
           loop

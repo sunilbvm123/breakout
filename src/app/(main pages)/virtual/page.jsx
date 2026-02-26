@@ -37,6 +37,7 @@ import BirthdayGetInTouch from "@/components/BirthdayGetInTouch";
 import abImg1 from "@/images/gal1.png";
 import abImg2 from "@/images/gal2.png";
 import abImg3 from "@/images/gal3.png";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 const page = () => {
   const [rooms, setRooms] = useState([]);
@@ -55,7 +56,12 @@ const page = () => {
     abImg3,
   ]);
 
+  const { gettncs } = useGlobalContext();
+  const virtualroomsTnc = gettncs?.find(
+    (item) => item.reference == "virtualrooms"
+  );
 
+  console.log("Birthday T&C:", virtualroomsTnc);
   const lookingForOptions = [
     { value: "Virtual", label: "Virtual" },
     { value: "In a Breakout Centre", label: "In a Breakout Centre" },
@@ -67,15 +73,15 @@ const page = () => {
     const fetchAllData = async () => {
       try {
         setLoading(true);
-  
+
         const [roomsRes, gamesRes] = await Promise.all([
           api.get("/virtual-escaperoom"),
           api.get("/virtual-games"),
         ]);
-  
+
         setRooms(roomsRes.data.data);
         setEscapeRooms(gamesRes.data.data);
-  
+
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -86,7 +92,7 @@ const page = () => {
       try {
         const response = await api.get("logos/brands");
         setBrandLogos(response?.data?.data);
-        console.log("skldfjhsjkdfhskhfshf",response?.data?.data)
+        console.log("skldfjhsjkdfhskhfshf", response?.data?.data)
       } catch (error) {
         console.error("Error fetching brand logos:", error);
       }
@@ -95,7 +101,7 @@ const page = () => {
     fetchBrandLogos();
   }, []);
 
-  
+
 
   const hmText =
     "In a typical escape room, your team is <span>locked in a themed room</span> You have a <span>set time.</span> You must <span>find clues,</span> solve puzzles To <span>escape</span> from the locked room.";
@@ -157,7 +163,7 @@ const page = () => {
               {rooms?.countersection && (
                 <TrustedSection className="pb-0" data={rooms?.countersection} />
               )}
-                <LogoSec className="pt-80 pb-0"
+              <LogoSec className="pt-80 pb-0"
                 // title={"<span>Brands</span> Hosted"}
                 title={"<span>Brands</span> Hosted"}
                 logos={brandLogos}
@@ -284,7 +290,8 @@ const page = () => {
               )}
 
               {rooms?.packagesection && (
-                <Packages className="pb-0" hasEventImg={true} packages={rooms?.packagesection} />
+                <Packages className="pb-0" hasEventImg={true}
+                  packages={rooms?.packagesection} data={virtualroomsTnc} />
               )}
 
               <Image
