@@ -238,7 +238,7 @@ const BirthdayGetInTouch = ({
                 onSubmit={formik.handleSubmit}
                 noValidate
               >
-                <div className="row align-items-end row-gap-25">
+                <div className="row align-items-end">
                   <div className="col-lg-6 col-12">
                     <div className="form-group">
                       <div className="input-group">
@@ -511,13 +511,13 @@ const BirthdayGetInTouch = ({
                     </div>
                   </div>
                   <div className="col-lg-12 col-12">
-                    <div className="">
+                    <div className="mt-4">
                       <button
-                        className="main-btn dark-btn"
+                        className="main-btn"
                         type="submit"
                         disabled={formik.isSubmitting}
                       >
-                        <span className="yellow-text">
+                        <span className="text-white">
                           {formik.isSubmitting
                             ? "Booking…"
                             : submitStatus === "success"

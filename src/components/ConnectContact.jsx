@@ -90,7 +90,7 @@ const ConnectContact = ({
           <div className="col-lg-12">
             <div className="hm-con-form-card">
               <form onSubmit={formik.handleSubmit} autoComplete="off">
-                <div className="row align-items-center justify-content-between">
+                <div className="row justify-content-between">
                   <div className="col-lg-5 col-12">
                     <div className="form-group">
                       <div className="input-group">
@@ -163,7 +163,10 @@ const ConnectContact = ({
                         </div>
                       )}
                     </div>
-                    <button
+                   
+                  </div>
+                  <div className="col-12 mt-4">
+                  <button
                       className="main-btn"
                       type="submit"
                       disabled={loading}

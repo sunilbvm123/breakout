@@ -146,7 +146,7 @@ const page = () => {
               <HmTextSec text={corporate?.contentsection?.content} />
             )}
 
-            <section className="section-padding pt-0">
+            <section className="">
               <div className="container">
                 <div className="row">
                   <div className="col-lg-12 ">
@@ -161,7 +161,7 @@ const page = () => {
                     </div>
                     {corporate?.contentsection?.footer && (
                       <p
-                        className="sec-head medium-20 mt-5"
+                        className="sec-head medium-20 mt-5  "
                         dangerouslySetInnerHTML={{
                           __html: corporate.contentsection.footer,
                         }}
@@ -193,10 +193,12 @@ const page = () => {
               {corporate &&
                 corporate?.googlereviews &&
                 corporate?.googlereviews?.length > 0 && (
+                  <div className="section-padding pb-0">
                   <GReviewSlider
                     commonStars={false}
                     data={corporate?.googlereviews}
                   />
+                  </div>
                 )}
 
               {corporate && corporate?.countersection && (
