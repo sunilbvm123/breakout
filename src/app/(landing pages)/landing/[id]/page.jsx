@@ -211,7 +211,7 @@ const escapeRoomsUltra =
               <div className="row">
                 <div className="col-lg-12 text-center">
                   <h3 className="sec-head medium sm-head">
-                    <span>Escape Rooms</span> in Bangalore
+                    <span>Escape Rooms</span> in Koramanagla
                   </h3>
                 </div>
               </div>
@@ -236,7 +236,7 @@ const escapeRoomsUltra =
               {escapeRoomsUltra && escapeRoomsUltra?.length > 0 && (
                 <div className="row row-gap-25 mt-3">
                   <div className="col-12">
-                    <h3 className="sec-head medium sm-head text-center">
+                    <h3 className="sec-head medium sm-head text-center mt-3">
                       At <span>Ultra</span>
                     </h3>
                   </div>
