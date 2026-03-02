@@ -118,9 +118,9 @@ const page = () => {
                           className="location-card text-sm"
                         >
                           <div className="location-card-img">
-                            {item?.bannersection?.image && (
+                            {item?.image && (
                               <Image
-                                src={item?.bannersection?.image}
+                                src={item?.image}
                                 alt={item?.title}
                                 width={500}
                                 height={500}
