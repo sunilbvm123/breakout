@@ -255,13 +255,13 @@ const page = () => {
   //   return () => clearTimeout(timer); // cleanup
   // }, []);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShowLocation(true);
-  //   }, 2000); // 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLocation(true);
+    }, 2000); // 3 seconds
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
 
   return (

@@ -18,6 +18,7 @@ import Link from "next/link";
 const LogoSec = ({ title, logos = null, className = "", link = true }) => {
   const { newsLogo } = useGlobalContext();
   const [data, setData] = useState(null);
+  console.log("setData_setData_setData",data)
   const [animationDuration, setAnimationDuration] = useState(85);
   useEffect(() => {
     if (logos) {

@@ -196,6 +196,7 @@ export default function Home() {
 
 
   const [data, setData] = useState(null);
+  console.log("setData_setData",data)
   const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
@@ -590,9 +591,6 @@ export default function Home() {
             </div>
           </>
         )}
-
-
-
     </>
   );
 }

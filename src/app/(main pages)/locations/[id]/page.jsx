@@ -88,7 +88,7 @@ const page = () => {
   console.log("skdfhsdjkfhksdhfhsdf",location?.title)
   const [loading, setLoading] = useState(true);
   const [showLocation, setShowLocation] = useState(false);
-
+console.log("sdlfjksdjfkdjshfkjhd",showLocation)
   useEffect(() => {
     const fetchLocation = async () => {
       try {

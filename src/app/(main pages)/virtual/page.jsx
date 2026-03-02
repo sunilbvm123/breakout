@@ -337,11 +337,12 @@ const page = () => {
           textData={rooms?.footersection}
           LookingForOptions={lookingForOptions}
         /> */}
-              <LogoSec className="pt-80 pb-0"
+              {/* <LogoSec className="pt-80 pb-0"
                 title={"<span>In the</span> News"}
                 logo={rooms?.brandlogos}
-                link={false}
-              />
+                // link={false}
+              /> */}
+              <LogoSec className="pb-0 pt-80" title={"In the <span>News</span>"} />
               {rooms?.footersection && (
                 <BirthdayGetInTouch
                   img={virtualIllus2}
