@@ -71,9 +71,17 @@ import PhotographicStyledImage from "@/components/PhotographicStyledImage";
 import bachelorIllus from "@/images/bachelor-illus.png";
 import farewellIllus from "@/images/farewell_illus.png";
 import WordByWordAnimation from "@/helpers/WordByWordAnimation";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 const page = () => {
   const [party, setParty] = useState(null);
+  const { gettncs } = useGlobalContext();
+
+  const birthdayTnc = gettncs?.find(
+    (item) => item.reference == "birthdays"
+  );
+
+  console.log("Birthday T&C:", birthdayTnc);
   useEffect(() => {
     const fetchParty = async () => {
       const response = await api.get(`party/farewell-archive`);
@@ -290,7 +298,7 @@ const page = () => {
         {party &&
           party?.packagesection &&
           party?.packagesection?.pricing?.columns?.length > 0 && (
-            <Packages className="pb-0" packages={party?.packagesection} />
+            <Packages className="pb-0" packages={party?.packagesection} data={birthdayTnc}/>
           )}
 
         {party && party?.googlereviews && (

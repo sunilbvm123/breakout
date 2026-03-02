@@ -34,12 +34,20 @@ import PartyGetInTouch from "@/components/PartyGetInTouch";
 import WordByWordAnimation from "@/helpers/WordByWordAnimation";
 import useScrollToTop from "@/helpers/useScrollToTop";
 import HomeContact from "@/components/home/HomeContact";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 const page = () => {
   // Remove scrollTo(0,0) on mount to avoid scroll jump issue
   const [party, setParty] = useState(null);
   console.log("ksdlfgdjkshgjkdfhgkhdf",party)
   const [pageLoading, setPageLoading] = useState(true);
+  const { gettncs } = useGlobalContext();
+
+  const birthdayTnc = gettncs?.find(
+    (item) => item.reference == "birthdays"
+  );
+
+  console.log("Birthday T&C:", birthdayTnc);
   useScrollToTop();
 
   useEffect(() => {
@@ -260,7 +268,7 @@ const page = () => {
         {party &&
           party?.packagesection &&
           party?.packagesection?.pricing?.columns?.length > 0 && (
-            <Packages packages={party?.packagesection} />
+            <Packages packages={party?.packagesection}  data={birthdayTnc}/>
           )}
 
         {party && party?.googlereviews && (
