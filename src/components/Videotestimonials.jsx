@@ -15,12 +15,12 @@ import swiperPrev from "@/images/chev-left.svg";
 import swiperNext from "@/images/chev-right.svg";
 
 const Videotestimonials = ({ data, className = "", }) => {
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
   const videoRef = useRef([]);
   const swiperRef = useRef(null); // Swiper instance ref
   const [playingVideo, setPlayingVideo] = useState(null);
   const [activeIndex, setActiveIndex] = useState(4);
-  const [isMuted, setIsMuted] = useState(true);
-  const [muteStates, setMuteStates] = useState({});
   let data1 = data;
   const doubledData = data1 ? [...data1, ...data1] : [];
   console.log("doubledData_doubledData", doubledData)
@@ -134,10 +134,13 @@ const Videotestimonials = ({ data, className = "", }) => {
                 spaceBetween={0}
                 initialSlide={4}
                 slideToClickedSlide={true}
-                // loop={data1?.length >= 4}
                 navigation={{
-                  nextEl: ".swiper-button-next",
-                  prevEl: ".swiper-button-prev",
+                  prevEl: prevRef.current,
+                  nextEl: nextRef.current,
+                }}
+                onBeforeInit={(swiper) => {
+                  swiper.params.navigation.prevEl = prevRef.current;
+                  swiper.params.navigation.nextEl = nextRef.current;
                 }}
                 loop={true}
                 breakpoints={{
@@ -222,11 +225,11 @@ const Videotestimonials = ({ data, className = "", }) => {
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <div className="swiper-button-prev custom-prev go-plan">
+              <div ref={prevRef} className="swiper-button-prev custom-prev go-plan">
                 <Image src={swiperPrev} alt="Previous" />
               </div>
 
-              <div className="swiper-button-next custom-next go-plan">
+              <div ref={nextRef} className="swiper-button-next custom-next go-plan">
                 <Image src={swiperNext} alt="Next" />
               </div>
             </div>
