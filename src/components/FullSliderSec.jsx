@@ -17,25 +17,59 @@ import bd7 from "@/images/bd7.jpg";
 import Link from "next/link";
 
 const FullSliderSec = ({ data, hasCardLinks = false }) => {
-  let data1 = data;
-  if (data) {
+  let data1 = "";
+  console.log("data1_data1", data)
+  if (data1) {
     data1 = data;
   } else {
     data1 = {
-      images: [
+      // images: [
+      //   {
+      //     image: bd1,
+      //     heading: "Custom Tailored Experiences",
+      //   },
+      //   {
+      //     image: bd2,
+      //     heading: "Custom Tailored Experiences",
+      //   },
+      //   {
+      //     image: bd3,
+      //     heading: "Custom Tailored Experiences",
+      //   },
+      // ],
+      description: "Try out these seven resources that we’ve created for you to plan the perfect birthday party for your loved ones. ",
+      heading: "7 Valuable Resources to help you plan the party",
+      icons: [
         {
-          image: bd1,
-          heading: "Custom Tailored Experiences",
+          heading: "Party Planning Template",
+          image: "https://breakout.bvmwebsolutions.comhttps://breakout.bvmwebsolutions.com/uploads/images/party_a3cd163f-cf17-405b-9575-256d10c59fae.jpeg",
+          link: "#"
+        }, {
+          heading: "Ebook",
+          image: null,
+          link: "https://1drv.ms/b/c/033f28a2603d05d2/IQD0muffutStQ4k0IlgvEXloAWci224sAK0HWWSMyr4mgCo?e=393vcE"
         },
         {
-          image: bd2,
-          heading: "Custom Tailored Experiences",
-        },
+          heading: "Venue Discovery Quiz",
+          image: "https://breakout.bvmwebsolutions.comhttps://breakout.bvmwebsolutions.com/uploads/images/party_a3cd163f-cf17-405b-9575-256d10c59fae.jpeg",
+          link: "/resources/quiz/party-finding"
+        }, {
+          heading: "Party Calculator",
+          image: null,
+          link: "https://1drv.ms/b/c/033f28a2603d05d2/IQD0muffutStQ4k0IlgvEXloAWci224sAK0HWWSMyr4mgCo?e=393vcE"
+        }
+        ,
         {
-          image: bd3,
-          heading: "Custom Tailored Experiences",
-        },
-      ],
+          heading: "Party Planning Template",
+          image: "https://breakout.bvmwebsolutions.comhttps://breakout.bvmwebsolutions.com/uploads/images/party_a3cd163f-cf17-405b-9575-256d10c59fae.jpeg",
+          link: "#"
+        }, {
+          heading: "Ebook",
+          image: null,
+          link: "https://1drv.ms/b/c/033f28a2603d05d2/IQD0muffutStQ4k0IlgvEXloAWci224sAK0HWWSMyr4mgCo?e=393vcE"
+        }
+      ]
+
     };
   }
   return (

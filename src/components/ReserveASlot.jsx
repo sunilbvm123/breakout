@@ -52,6 +52,9 @@ const ReserveASlot = ({ room, page_name, data = {}, onOpenFaq, className = "", }
   const [days, setDays] = useState([]);
   const [showMonthYear, setShowMonthYear] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [cartId, setCartId] = useState(null);
+  console.log("setCartId_setCartId",cartId)
+  const [showIframe, setShowIframe] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -307,10 +310,12 @@ const ReserveASlot = ({ room, page_name, data = {}, onOpenFaq, className = "", }
         setHasSlotsFetched(false);
         setSelectedDate(null);
 
-        window.open(
-          `https://book.breakout.in/embed?cartId=${response.bookingId}`,
-          "_blank"
-        );
+        // window.open(
+        //   `https://book.breakout.in/embed?cartId=${response.bookingId}`,
+        //   "_blank"
+        // );
+        setCartId(response.bookingId);
+        setShowIframe(true);
       } else {
         toast.error("Booking failed. Please try again.");
       }
@@ -1066,6 +1071,18 @@ const ReserveASlot = ({ room, page_name, data = {}, onOpenFaq, className = "", }
           </div>
         </div>
       </div>
+      <CommonModal show={showIframe} handleClose={() => setShowIframe(false)}>
+        <div style={{ width: "100%", height: "75vh" }}>
+          {cartId && (
+            <iframe
+              src={`https://bs.kreeda.icu/embed/book?cartId=${cartId}`}
+              width="100%"
+              height="100%"
+              frameBorder="0"
+            />
+          )}
+        </div>
+      </CommonModal>
     </section>
   );
 };

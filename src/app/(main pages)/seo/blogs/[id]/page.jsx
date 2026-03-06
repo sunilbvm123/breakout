@@ -65,14 +65,13 @@ const page = () => {
   const [blogData, setBlogData] = useState(null);
   console.log("sfghsdgfhsdgfj",blogData)
   const { id } = useParams();
-  console.log("sdbsdjfsjdfjdsfjsdjfjsdf_id_id",id)
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
-  console.log("type value:", type);
+
   useEffect(() => {
     const fetchBlogData = async () => {
       var url = `/blog/${id}`;
-      if (type == "birthday") {
+      if (type === "birthday") {
         url = `/birthday-blog/${id}`;
       }
       const res = await api.get(url);
@@ -83,7 +82,7 @@ const page = () => {
 
   return (
     <>
-      {type === "birthday" && blogData && <BirthdayBlog blogData={blogData} id={id}/>}
+      {type === "birthday" && blogData && <BirthdayBlog blogData={blogData} />}
       {type !== "birthday" && blogData && <SigngleBlog blogData={blogData} />}
     </>
   );

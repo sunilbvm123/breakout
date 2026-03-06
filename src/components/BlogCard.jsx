@@ -3,8 +3,9 @@ import Image from "next/image";
 import blogImg from "@/images/blog-img.jpg";
 import Link from "next/link";
 
-const BlogCard = ({ blog }) => {
+const BlogCard = ({ blog}) => {
   if (!blog) return null;
+  console.log("BlogCard-BlogCardBlogCard",blog.slug)
   return (
     <Link href={`/resources/blogs/${blog.slug}?type=${blog?.type}`}>
       <article className="blog-card">

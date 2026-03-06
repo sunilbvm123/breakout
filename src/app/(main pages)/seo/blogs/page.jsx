@@ -6,11 +6,9 @@ import BrochureDownloadForm from "@/components/BrochureDownloadForm";
 import blogIllus from "@/images/blog-illus.png";
 import Image from "next/image";
 import api from "@/helpers/api";
-import ResourcesSidebar from "@/components/Blogs/ResourcesSidebar";
 const page = () => {
   const [blogs, setBlogs] = useState([]);
   const [filteredBlogs, setFilteredBlogs] = useState([]);
-  console.log("filteredBlogs_filteredBlogs",filteredBlogs)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -107,9 +105,9 @@ const page = () => {
   };
 
   return (
-    <div className="blogs-page pt-80">
+    <div className="blogs-page section-padding">
       <div className="container">
-        <div className="row text-center">
+        <div className="row text-center pb-5">
           <div className="col-12">
             <h3 className="sec-head medium">
               Blog to <span>Plan Celebrations</span>
@@ -118,7 +116,7 @@ const page = () => {
         </div>
         <div className="row pt-4">
           <div className="col-lg-3 col-12">
-            <ResourcesSidebar
+            <Sidebar
               handleSearchChange={handleSearchChange}
               totalResources={filteredBlogs.length}
               handleSortChange={handleSortChange}
@@ -130,7 +128,7 @@ const page = () => {
               {filteredBlogs.length > 0 ? (
                 filteredBlogs.map((blog, index) => (
                   <div className="col-lg-4 col-12" key={index}>
-                    <BlogCard blog={blog} slug={blog.slug}/>
+                    <BlogCard blog={blog} />
                   </div>
                 ))
               ) : (
@@ -164,7 +162,7 @@ const page = () => {
         </div>
       </div>
       <div className="black-gr-div">
-        <BrochureDownloadForm page_name="resources_blogs"/>
+        <BrochureDownloadForm page_name="seo_blogs"/>
         <Image src={blogIllus} alt="black-gr" className="w-100 h-auto" />
       </div>
     </div>

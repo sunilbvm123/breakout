@@ -6,6 +6,7 @@ import SplitType from "split-type";
 
 const HmTextSecBk = ({ text,className = "", home = false }) => {
   const textRef = useRef(null);
+  const formattedText = text.replace(/\n/g, "<br/>");
 
   useEffect(() => {
     // console.log("Rendered textRef:", textRef.current?.innerHTML);
@@ -84,7 +85,7 @@ const HmTextSecBk = ({ text,className = "", home = false }) => {
               <div
                 ref={textRef}
                 className="big-text"
-                dangerouslySetInnerHTML={{ __html: text }}
+                dangerouslySetInnerHTML={{ __html: formattedText }}
               />
             )}
           </div>

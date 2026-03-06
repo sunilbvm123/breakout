@@ -67,7 +67,7 @@ import LocationCard from "@/components/LocationCard";
 import OurLocationSec from "@/components/OurLocationSec";
 import PartyGetInTouch from "@/components/PartyGetInTouch";
 
-const BirthdayBlog = ({ blogData }) => {
+const BirthdayBlog = ({ blogData,id= ""}) => {
   // Share functionality
   const handleShare = (platform) => {
     const currentUrl = window.location.href;
@@ -76,7 +76,7 @@ const BirthdayBlog = ({ blogData }) => {
       blogData?.description || "Interesting read! Have a look.";
 
     let shareUrl = "";
-
+console.log("BirthdayBlog_BirthdayBlog",id)
     switch (platform) {
       case "copy":
         navigator.clipboard.writeText(currentUrl).then(() => {
@@ -202,21 +202,21 @@ const BirthdayBlog = ({ blogData }) => {
         <Image src={toolIllus} className="illus-image" alt="tool-illus" />
       </div>
 
-      <BirthdayVenueWidget />
+      <BirthdayVenueWidget id={id}/>
 
       <GReviewSlider commonStars={false} />
 
-      <OurLocationSec
+      {/* <OurLocationSec
         className="sec-padding-top"
         // title={`About Our Breakout®  <span>${blogData?.title} Location</span>`}
         slug="koramangala"
-      />
+      /> */}
 
       {blogData?.footersection && (
-        <PartyGetInTouch data={blogData?.footersection} />
+        <PartyGetInTouch data={blogData?.footersection} noImage={true}/>
       )}
 
-      {blogData?.footersection && (
+      {/* {blogData?.footersection && (
         <section className="section-padding Conclusion-sec pb-0">
           <div className="container">
             <div className="row justify-content-center">
@@ -237,7 +237,7 @@ const BirthdayBlog = ({ blogData }) => {
             </div>
           </div>
         </section>
-      )}
+      )} */}
       <div className="black-gr-div">
         <section className="found-sec pt-80">
           <div className="container">
