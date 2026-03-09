@@ -31,6 +31,7 @@ export const GlobalProvider = ({ children }) => {
   const [getprivacy, setPrivacy] = useState(null);
   const [getrefundpolicy, setRefundPolicy] = useState(null);
   const [gettermservies, setTermServies] = useState(null);
+  const [venuefinderquiz, setVenueFinderquiz] = useState(null);
   const [finderQuizValues, setFinderQuizValues] = useState({
     step1: {
       value: null,
@@ -89,7 +90,7 @@ export const GlobalProvider = ({ children }) => {
       error: null,
     },
   });
-
+ const get_blog_id = localStorage.getItem("blog_slug")
   // Loading states
   const [loading, setLoading] = useState({
     escaperoomLocations: true,
@@ -104,7 +105,8 @@ export const GlobalProvider = ({ children }) => {
     getcontact:true,
     getprivacy:true,
     getrefundpolicy:true,
-    gettermservies:true
+    gettermservies:true,
+    venuefinderquiz:true
   });
 
   // Error states
@@ -121,7 +123,8 @@ export const GlobalProvider = ({ children }) => {
     getcontact:null,
     getprivacy:null,
     getrefundpolicy:null,
-    gettermservies:null
+    gettermservies:null,
+    venuefinderquiz:null
   });
 
   const updateFinderQuizValue = (step, value, error) => {
@@ -209,6 +212,19 @@ export const GlobalProvider = ({ children }) => {
       setErrors((prev) => ({ ...prev, venueCategories: error }));
     } finally {
       setLoading((prev) => ({ ...prev, venueCategories: false }));
+    }
+  };
+
+  const fetchVenuefinderquiz = async () => {
+    try {
+      setLoading((prev) => ({ ...prev, venuefinderquiz: true }));
+      const response = await api.get(`/quiz/${get_blog_id}/take`);
+      setVenueFinderquiz(response.data.data);
+      setErrors((prev) => ({ ...prev, venuefinderquiz: null }));
+    } catch (error) {
+      setErrors((prev) => ({ ...prev, venuefinderquiz: error }));
+    } finally {
+      setLoading((prev) => ({ ...prev, venuefinderquiz: false }));
     }
   };
 
@@ -379,7 +395,8 @@ export const GlobalProvider = ({ children }) => {
     fetchContact()
     fetchPrivacyPolicy();
     fetchRefundPolicy();
-    fetchTermsServies()
+    fetchTermsServies();
+    fetchVenuefinderquiz();
   }, []);
 
   // Refresh functions for manual data updates
@@ -395,7 +412,8 @@ export const GlobalProvider = ({ children }) => {
     getcontact:fetchContact,
     getprivacy:fetchPrivacyPolicy,
     getrefundpolicy:fetchRefundPolicy,
-    gettermservies:fetchTermsServies
+    gettermservies:fetchTermsServies,
+    venuefinderquiz:fetchVenuefinderquiz,
   };
 
   const value = {
@@ -414,6 +432,7 @@ export const GlobalProvider = ({ children }) => {
     thirdPartyGames,
     availableSlots,
     venueCategories,
+    venuefinderquiz,
     finderQuizValues,
     quoteCalculatorValues,
     costCalculatorValues,
@@ -445,7 +464,8 @@ export const GlobalProvider = ({ children }) => {
     fetchContact,
     fetchPrivacyPolicy,
     fetchRefundPolicy,
-    fetchTermsServies
+    fetchTermsServies,
+    fetchVenuefinderquiz
   };
 
   return (

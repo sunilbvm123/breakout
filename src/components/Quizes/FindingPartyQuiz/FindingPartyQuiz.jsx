@@ -25,20 +25,30 @@ const FindingPartyQuiz = () => {
     }
   };
 
+  // const renderStep = (step) => {
+  //   switch (step) {
+  //     case 1:
+  //       return <Step1 />;
+  //     case 2:
+  //       return <Step2 />;
+  //     case 3:
+  //       return <Step3 />;
+  //     case 4:
+  //       return <Step4 />;
+  //     case 5:
+  //       return <Step5 setIsResult={setIsResult} />;
+  //     default:
+  //       return <Step1 />;
+  //   }
+  // };
   const renderStep = (step) => {
     switch (step) {
       case 1:
-        return <Step1 />;
+        return <Step1 goToResult={() => setCurrentStep(2)} />;
       case 2:
-        return <Step2 />;
-      case 3:
-        return <Step3 />;
-      case 4:
-        return <Step4 />;
-      case 5:
         return <Step5 setIsResult={setIsResult} />;
       default:
-        return <Step1 />;
+        return <Step1 goToResult={() => setCurrentStep(2)} />;
     }
   };
   return (
@@ -71,7 +81,7 @@ const FindingPartyQuiz = () => {
             <div className="col-12">
               <div className="quiz-container">
                 <div className="quiz-content">{renderStep(currentStep)}</div>
-                {currentStep < totalSteps && (
+                {/* {currentStep < totalSteps && (
                   <div className="quiz-navigation">
                     <button
                       onClick={handlePrev}
@@ -88,7 +98,7 @@ const FindingPartyQuiz = () => {
                       <span>Next</span>
                     </button>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>
