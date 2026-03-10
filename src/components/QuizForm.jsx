@@ -163,7 +163,7 @@ const QuizForm = ({
 
 
 useEffect(() => {
-  setBlogSlug(localStorage.getItem("blog_slug"));
+  setBlogSlug(sessionStorage.getItem("blog_slug"));
 }, []);
 
   useEffect(() => {

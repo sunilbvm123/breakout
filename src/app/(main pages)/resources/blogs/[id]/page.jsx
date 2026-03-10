@@ -116,7 +116,7 @@ const Page = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      localStorage.setItem("blog_slug", id);
+      sessionStorage.setItem("blog_slug", id);
     }, 1500);
   
     return () => clearTimeout(timer);

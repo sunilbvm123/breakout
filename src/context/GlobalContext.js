@@ -92,7 +92,6 @@ export const GlobalProvider = ({ children }) => {
       error: null,
     },
   });
- const get_blog_id = localStorage.getItem("blog_slug")
   // Loading states
   const [loading, setLoading] = useState({
     escaperoomLocations: true,
@@ -133,7 +132,7 @@ export const GlobalProvider = ({ children }) => {
   // LOAD BLOG SLUG FROM STORAGE
   // -----------------------------
   useEffect(() => {
-    const slug = localStorage.getItem("blog_slug");
+    const slug = sessionStorage.getItem("blog_slug");
     if (slug) setBlogSlug(slug);
   }, []);
 
