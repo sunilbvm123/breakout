@@ -100,7 +100,7 @@ const QuizForm = ({
 
         console.log("Final Payload:", bookingData);
 
-        const res = await quizresposesubmit(blogSlug, bookingData);
+        const res = await quizresposesubmit(bookingData);
 
         console.log("API Response:", res?.data?.recommendations?.venues);
         setVenues(res?.data?.recommendations?.venues)

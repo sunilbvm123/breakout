@@ -235,9 +235,10 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const fetchVenuefinderquiz = async () => {
+    if (!blogSlug) return; // wait until blogSlug is loaded
     try {
       setLoading((prev) => ({ ...prev, venuefinderquiz: true }));
-      const response = await api.get(`/quiz/${get_blog_id}/take`);
+      const response = await api.get(`/quiz/${blogSlug}/take`);
       setVenueFinderquiz(response.data.data);
       setErrors((prev) => ({ ...prev, venuefinderquiz: null }));
     } catch (error) {
@@ -298,6 +299,19 @@ export const GlobalProvider = ({ children }) => {
   const bookASlot = async (bookingData) => {
     try {
       const response = await axios.post(`/api/bookings`, bookingData);
+      return response.data;
+    } catch (error) {
+      console.log("error", error);
+      toast.error(
+        error?.response?.data?.error || error?.message || "Something went wrong"
+      );
+      throw error;
+    }
+  };
+
+  const quizresposesubmit = async (bookingData) => {
+    try {
+      const response = await api.post(`/quiz/${blogSlug}/respond`, bookingData);
       return response.data;
     } catch (error) {
       console.log("error", error);
@@ -513,7 +527,7 @@ export const GlobalProvider = ({ children }) => {
     updateCostCalculatorValue,
 
     bookASlot,
-
+    quizresposesubmit,
     fetchThirdPartyGames,
     fetchAvailableSlots,
     fetchVenuefinderquiz,
